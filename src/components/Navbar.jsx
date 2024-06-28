@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { MobNav, DesktopNav } from "./";
 import { Logo } from "../assets";
+import { SignedIn } from "@clerk/clerk-react";
 
 function Navbar() {
   return (
@@ -12,9 +13,10 @@ function Navbar() {
         <Logo width={45} height={45} />
         Expenses
       </Link>
-
-      <MobNav />
-      <DesktopNav />
+      <SignedIn>
+        <MobNav />
+        <DesktopNav />
+      </SignedIn>
     </div>
   );
 }

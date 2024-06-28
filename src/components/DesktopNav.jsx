@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { navLinks } from "../constants";
+import { UserButton } from "@clerk/clerk-react";
 
 function DesktopNav() {
   return (
@@ -14,7 +15,10 @@ function DesktopNav() {
       ))}
 
       <li>
-        <span className="px-6 py-3 bg-secondary-normal rounded-full"></span>
+        <UserButton
+          userProfileUrl="/"
+          appearance={{ variables: { colorText: "#063348" } }}
+        />
       </li>
     </ul>
   );

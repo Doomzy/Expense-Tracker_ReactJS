@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import { navLinks } from "../constants";
+import { mobNavLinks } from "../constants";
 import { useState, useRef, useEffect } from "react";
 import { MenuBtn } from "./";
-import { Burger_Icon, Close_Icon } from "../assets";
+import { Burger_Icon, Close_Icon, Logout_Icon } from "../assets";
+import { SignOutButton } from "@clerk/clerk-react";
 
 function MobNav() {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -34,18 +35,20 @@ function MobNav() {
           <Burger_Icon width={50} height={50} />
         )}
       </MenuBtn>
+
       <ul
+        id="MobNav"
         className={`${
-          toggleMenu ? "h-3/5" : "h-0"
-        } transition-all md:hidden overflow-hidden fixed left-0 text-3xl shadow-xl shadow-zinc-400 right-0 top-[7.1rem] pt-0 px-5 bg-primary-normal`}
+          toggleMenu ? "h-[35rem]" : "h-0"
+        } transition-all md:hidden overflow-hidden fixed left-0 text-3xl right-0 top-[7.1rem] pt-0 px-5 bg-primary-normal`}
       >
-        {navLinks.map((link) => (
+        {mobNavLinks.map((link) => (
           <li
             key={link.name}
             className="hover:scale-105 transition-all my-5 rounded-3xl border-4 border-primary-dark"
           >
             <Link
-              className="w-full h-full p-7 flex justify-between items-center"
+              className="w-full h-full p-4 flex justify-between items-center"
               to={""}
             >
               <span>{link.name}</span>
@@ -53,8 +56,13 @@ function MobNav() {
             </Link>
           </li>
         ))}
-        <li className=" p-7 mb-3 rounded-3xl border-4 border-primary-dark">
-          <span className="px-6 py-3 bg-secondary-normal rounded-full"></span>
+        <li className="hover:scale-105 transition-all my-5 rounded-3xl border-4 border-primary-dark">
+          <SignOutButton>
+            <button className="flex justify-between">
+              <p>Logout</p>
+              <Logout_Icon width={45} height={45} />
+            </button>
+          </SignOutButton>
         </li>
       </ul>
     </div>
