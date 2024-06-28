@@ -3,4 +3,24 @@
 @tailwind utilities;
 
 :root {
+  background-color: theme("colors.primary.normal");
+}
+
+#AuthPage button {
+  padding: 1rem 6rem;
+  border: 1px solid darkslategrey;
+  background-color: theme("colors.primary.dark");
+  color: whitesmoke;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  text-transform: uppercase;
+}
+
+#AuthPage button:hover {
+  scale: 110%;
 }
