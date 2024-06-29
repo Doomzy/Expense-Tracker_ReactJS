@@ -50,6 +50,7 @@ function MobNav() {
             <Link
               className="w-full h-full p-4 flex justify-between items-center"
               to={"/" + link.name}
+              onClick={() => setToggleMenu(false)}
             >
               <span>{link.name}</span>
               <link.icon width={45} height={45} />
