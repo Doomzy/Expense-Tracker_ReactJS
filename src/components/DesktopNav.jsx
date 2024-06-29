@@ -16,7 +16,7 @@ function DesktopNav() {
 
       <li>
         <UserButton
-          userProfileUrl="/"
+          userProfileUrl="/profile"
           appearance={{ variables: { colorText: "#063348" } }}
         />
       </li>

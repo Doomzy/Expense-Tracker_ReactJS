@@ -33,6 +33,7 @@
 
 #MobNav {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 15px 15px;
+  z-index: 100;
 }
 
 #MobNav button {
@@ -40,4 +41,122 @@
   width: 100%;
   height: 100%;
   text-align: start;
+}
+
+.cl-headerTitle {
+  font-size: 2.3rem;
+  text-transform: capitalize;
+  color: theme("colors.primary.normal");
+}
+
+.cl-profileSectionTitleText,
+.cl-navbarButton {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.cl-navbarButton,
+.cl-navbar a,
+.cl-navbar p {
+  color: whitesmoke;
+}
+
+.cl-menuButton,
+.cl-formButtonReset,
+.cl-profileSectionPrimaryButton {
+  background-color: theme("colors.primary.dark");
+  color: whitesmoke;
+}
+
+.cl-button:hover {
+  scale: 105%;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.cl-actionCard,
+.cl-menuItem {
+  background-color: theme("colors.secondary.normal");
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.cl-menuList {
+  background-color: transparent;
+  margin-top: -10px;
+}
+
+.cl-formButtonPrimary {
+  color: theme("colors.primary.normal");
+}
+.cl-menuItem.cl-button {
+  margin-bottom: 0.6rem;
+  margin-top: 0.1rem;
+}
+
+.cl-formButtonPrimary:hover,
+.cl-menuItem:hover {
+  background-color: theme("colors.secondary.dark");
+  scale: 100%;
+}
+
+.cl-menuButton:hover,
+.cl-formButtonReset:hover,
+.cl-navbarMobileMenuButton:hover,
+.cl-profileSectionPrimaryButton:hover {
+  background-color: theme("colors.primary.dark");
+  color: theme("colors.secondary.dark");
+}
+
+.cl-profileSection {
+  border-top: 1px solid theme("colors.primary.dark");
+}
+
+.cl-navbar {
+  background: theme("colors.primary.normal");
+  box-shadow: rgba(0, 0, 0, 0.35) 8px 10px 15px;
+  padding: 2.5rem 0.8rem;
+}
+
+.cl-navbar h1,
+.cl-navbar::before {
+  color: theme("colors.secondary.normal");
+  font-size: 2.3rem;
+}
+
+.cl-navbar::before {
+  content: "Account";
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .cl-navbar::before {
+    display: block;
+  }
+}
+
+.cl-navbarButton {
+  padding: 1rem 0.4rem;
+}
+
+.cl-navbarButton svg {
+  width: 35px;
+  height: 35px;
+  color: theme("colors.secondary.normal");
+}
+
+.cl-formFieldInput {
+  border-width: 1px !important;
+  border-color: theme("colors.secondary.dark");
+  border-style: solid;
+}
+
+.cl-navbarMobileMenuButton {
+  font-size: 1.8rem;
+}
+.cl-navbarMobileMenuButton svg {
+  width: 40px;
+  height: 40px;
 }

@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Navbar, ProtectedRoute } from "./components";
-import { AuthPage } from "./pages";
+import { AuthPage, ProfilePage } from "./pages";
 
 function App() {
   return (
@@ -13,6 +13,14 @@ function App() {
           element={
             <ProtectedRoute>
               <div>Home</div>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
             </ProtectedRoute>
           }
         />
