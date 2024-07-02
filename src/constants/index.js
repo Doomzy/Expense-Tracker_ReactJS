@@ -17,3 +17,14 @@ export const mobNavLinks = [
   { name: "Reports", icon: Reports_Icon },
   { name: "Profile", icon: Profile_Icon },
 ];
+
+export const transaction_Categories = [
+  "Food",
+  "Transportation",
+  "Shopping",
+  "Bills",
+  "Entertainment",
+  "Education",
+  "Subscription",
+  "Other",
+];

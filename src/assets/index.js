@@ -6,6 +6,7 @@ import Close_Icon from "./icons/Close_Icon.jsx";
 import Logo from "./icons/Logo.jsx";
 import Profile_Icon from "./icons/Profile_Icon.jsx";
 import Logout_Icon from "./icons/Logout_Icon.jsx";
+import Money_Icon from "./icons/Money_Icon.jsx";
 
 export {
   Burger_Icon,
@@ -16,4 +17,5 @@ export {
   Logo,
   Profile_Icon,
   Logout_Icon,
+  Money_Icon,
 };
