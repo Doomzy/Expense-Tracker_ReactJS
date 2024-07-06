@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Navbar, ProtectedRoute } from "./components";
-import { AuthPage, ProfilePage } from "./pages";
+import { AuthPage, ProfilePage, HomePage } from "./pages";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           index
           element={
             <ProtectedRoute>
-              <div>Home</div>
+              <HomePage />
             </ProtectedRoute>
           }
         />
