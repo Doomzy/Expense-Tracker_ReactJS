@@ -28,3 +28,32 @@ export const transaction_Categories = [
   "Subscription",
   "Other",
 ];
+
+///fake data
+
+export const latest_transaction = [
+  {
+    id: 1,
+    date: "05-07-2024",
+    category: "Salary",
+    amount: 1500,
+  },
+  {
+    id: 2,
+    date: "05-07-2024",
+    category: "Freelance",
+    amount: 300,
+  },
+  {
+    id: 3,
+    date: "06-07-2024",
+    category: "Investment",
+    amount: 458,
+  },
+  {
+    id: 4,
+    date: "07-07-2024",
+    category: "Other",
+    amount: 500,
+  },
+];

@@ -1,5 +1,6 @@
 import { Money_Icon } from "../assets";
-import { NewTransactionCard } from "../components";
+import { NewTransactionCard, LatestEarnings } from "../components";
+import { latest_transaction } from "../constants";
 
 function HomePage() {
   return (
@@ -15,7 +16,9 @@ function HomePage() {
       </div>
       <div className=" lg:grid grid-cols-3 gap-12 2xl:gap-22 mt-14">
         <NewTransactionCard />
-        <div className=" col-span-2"></div>
+        <div className=" col-span-2">
+          <LatestEarnings data={latest_transaction} />
+        </div>
       </div>
     </div>
   );
