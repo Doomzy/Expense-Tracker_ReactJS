@@ -22,8 +22,8 @@ function CustomTable({ data }) {
       id: 3,
     },
     {
-      header: "Description",
-      accessorKey: "description",
+      header: "Title",
+      accessorKey: "title",
       id: 4,
     },
     {
