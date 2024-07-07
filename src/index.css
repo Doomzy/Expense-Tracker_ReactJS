@@ -167,8 +167,83 @@
   height: 40px;
 }
 
+textarea {
+  resize: none;
+}
+
 #Transaction_Form input,
+#Transaction_Form textarea,
 #Transaction_Form select {
   color: theme("colors.primary.dark");
   border: 1px solid theme("colors.primary.dark");
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  width: 100%;
+}
+
+table {
+  margin-top: 1.5rem;
+  background-color: white;
+  border-radius: 20px;
+  text-align: center;
+  width: 100%;
+  color: theme("colors.primary.normal");
+  overflow: hidden;
+}
+
+table tr {
+  border: 1px solid theme("colors.primary.dark");
+  padding: 0.35em;
+}
+
+table tbody tr:hover {
+  cursor: pointer;
+  background-color: rgb(206, 206, 206);
+}
+
+table th,
+table td {
+  padding: 0.625em;
+  text-align: center;
+}
+
+table th {
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table thead {
+    border: none;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    display: block;
+  }
+
+  table td {
+    display: block;
+    font-size: 0.9em;
+    text-align: right;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
 }

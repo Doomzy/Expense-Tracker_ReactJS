@@ -23,7 +23,6 @@ function InputField({
           name={name}
           type={type}
           placeholder={placeholder}
-          className=" rounded-2xl w-full p-2 text-base"
         />
         <p className=" ms-3 mt-1 text-xs text-gray-600 font-normal">{msg}</p>
       </label>

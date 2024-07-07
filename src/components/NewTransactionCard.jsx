@@ -7,6 +7,7 @@ function NewTransactionCard() {
     amount: "",
     isExpense: false,
     category: "",
+    title: "",
     description: "",
     datetime: "",
   });
@@ -17,7 +18,7 @@ function NewTransactionCard() {
   }
 
   return (
-    <div className=" bg-white text-white rounded-xl h-fit box_shadow font-semibold">
+    <div className=" sticky top-[4rem] bg-white text-white rounded-xl h-fit box_shadow font-semibold">
       <p
         className={` text-4xl mb-6 ${
           formData.isExpense ? " bg-red " : " bg-green "
@@ -84,15 +85,29 @@ function NewTransactionCard() {
         </label>
 
         <InputField
-          value={formData.description}
+          value={formData.title}
           handleChange={handleChange}
-          name="description"
-          label="Description"
+          name="title"
+          label="Title"
           type="text"
           msg="Max Length is 80 Characters"
           maxLength={80}
-          placeholder="Transaction's Description"
+          placeholder="Transaction's Title"
         />
+
+        <label className=" text-lg ms-2" htmlFor="description">
+          Description
+          <textarea
+            value={formData.description}
+            onChange={handleChange}
+            name="description"
+            id="description"
+            placeholder="Transaction's Description"
+            rows={4}
+            maxLength={233}
+          />
+        </label>
+
         <InputField
           value={formData.date}
           handleChange={handleChange}
