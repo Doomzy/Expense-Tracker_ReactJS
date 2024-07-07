@@ -5,6 +5,8 @@ import MenuBtn from "./MenuBtn.jsx";
 import ProtectedRoute from "./hoc/ProtectedRoute.jsx";
 import NewTransactionCard from "./NewTransactionCard.jsx";
 import LatestEarnings from "./LatestEarnings.jsx";
+import CustomTable from "./CustomTable.jsx";
+import SectionTitle from "./fragments/SectionTitle.jsx";
 
 export {
   Navbar,
@@ -14,4 +16,6 @@ export {
   ProtectedRoute,
   NewTransactionCard,
   LatestEarnings,
+  CustomTable,
+  SectionTitle,
 };

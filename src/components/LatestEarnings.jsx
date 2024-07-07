@@ -1,17 +1,10 @@
 import { Link } from "react-router-dom";
+import { SectionTitle } from "./";
 
 function LatestEarnings({ data }) {
   return (
     <div>
-      <div className="flex justify-between my-5 font-semibold text-md text-secondary-normal">
-        <p className=" text-white text-4xl font-semibold md:mt-1">
-          Latest Earnings
-        </p>
-        <button className="border border-secondary-dark px-3 py-2 h-fit rounded-xl hover:scale-105 transition-all">
-          See More
-        </button>
-      </div>
-
+      <SectionTitle text="Latest Income" link_to="/" />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-7 text-primary-normal">
         {data.map((transaction) => (
           <Link

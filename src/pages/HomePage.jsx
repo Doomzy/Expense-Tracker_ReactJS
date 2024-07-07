@@ -1,6 +1,6 @@
 import { Money_Icon } from "../assets";
-import { NewTransactionCard, LatestEarnings } from "../components";
-import { latest_transaction } from "../constants";
+import { NewTransactionCard, LatestEarnings, CustomTable } from "../components";
+import { latest_transaction, fake_transactions } from "../constants";
 
 function HomePage() {
   return (
@@ -18,6 +18,7 @@ function HomePage() {
         <NewTransactionCard />
         <div className=" col-span-2">
           <LatestEarnings data={latest_transaction} />
+          <CustomTable data={fake_transactions} />
         </div>
       </div>
     </div>
