@@ -7,6 +7,7 @@ import NewTransactionCard from "./NewTransactionCard.jsx";
 import LatestEarnings from "./LatestEarnings.jsx";
 import CustomTable from "./CustomTable.jsx";
 import SectionTitle from "./fragments/SectionTitle.jsx";
+import Modal from "./Modal.jsx";
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   LatestEarnings,
   CustomTable,
   SectionTitle,
+  Modal,
 };

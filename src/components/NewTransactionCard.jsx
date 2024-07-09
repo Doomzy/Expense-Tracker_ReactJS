@@ -2,7 +2,7 @@ import { useState } from "react";
 import { transaction_Categories } from "../constants";
 import InputField from "./fragments/InputField.jsx";
 
-function NewTransactionCard() {
+function NewTransactionCard({ extra_classes }) {
   const [formData, setformData] = useState({
     amount: "",
     isExpense: false,
@@ -18,7 +18,12 @@ function NewTransactionCard() {
   }
 
   return (
-    <div className=" sticky top-[4rem] bg-white text-white rounded-xl h-fit box_shadow font-semibold">
+    <div
+      className={
+        extra_classes +
+        " sticky top-[4rem] bg-white text-white rounded-xl h-fit box_shadow font-semibold"
+      }
+    >
       <p
         className={` text-4xl mb-6 ${
           formData.isExpense ? " bg-red " : " bg-green "
