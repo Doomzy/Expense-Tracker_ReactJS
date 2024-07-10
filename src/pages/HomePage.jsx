@@ -15,7 +15,7 @@ function HomePage() {
         </div>
       </div>
       <div className=" lg:grid grid-cols-3 gap-12 2xl:gap-22 mt-14">
-        <NewTransactionCard />
+        <NewTransactionCard extra_classes="lg:block hidden" />
         <div className=" col-span-2">
           <LatestEarnings data={latest_transaction} />
           <CustomTable data={fake_transactions} />
