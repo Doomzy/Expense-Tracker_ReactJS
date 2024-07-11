@@ -8,6 +8,7 @@ import LatestEarnings from "./LatestEarnings.jsx";
 import CustomTable from "./CustomTable.jsx";
 import SectionTitle from "./fragments/SectionTitle.jsx";
 import Modal from "./Modal.jsx";
+import TotalBalance from "./fragments/TotalBalance.jsx";
 
 export {
   Navbar,
@@ -20,4 +21,5 @@ export {
   CustomTable,
   SectionTitle,
   Modal,
+  TotalBalance,
 };

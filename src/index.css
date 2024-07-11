@@ -184,7 +184,7 @@ textarea {
 }
 
 table {
-  margin-top: 1.5rem;
+  margin-top: 0.7rem;
   background-color: white;
   border-radius: 20px;
   text-align: center;
@@ -205,7 +205,7 @@ table tbody tr:hover {
 
 table th,
 table td {
-  padding: 0.625em;
+  padding: 0.625em 1rem;
   text-align: center;
 }
 
@@ -216,7 +216,7 @@ table th {
 }
 
 @media screen and (max-width: 600px) {
-  table thead {
+  .table thead {
     border: none;
     height: 1px;
     margin: -1px;
@@ -226,24 +226,24 @@ table th {
     width: 1px;
   }
 
-  table tr {
+  .table tr {
     display: block;
   }
 
-  table td {
+  .table td {
     display: block;
     font-size: 0.9em;
     text-align: right;
   }
 
-  table td::before {
+  .table td::before {
     content: attr(data-label);
     float: left;
     font-weight: 700;
     text-transform: uppercase;
   }
 
-  table td:last-child {
+  .table td:last-child {
     border-bottom: 0;
   }
 }
