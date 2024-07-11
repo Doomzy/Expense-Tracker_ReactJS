@@ -1,5 +1,10 @@
 import { Money_Icon } from "../assets";
-import { NewTransactionCard, LatestEarnings, CustomTable } from "../components";
+import {
+  NewTransactionCard,
+  LatestEarnings,
+  CustomTable,
+  SectionTitle,
+} from "../components";
 import { latest_transaction, fake_transactions } from "../constants";
 
 function HomePage() {
@@ -18,7 +23,8 @@ function HomePage() {
         <NewTransactionCard extra_classes="lg:block hidden" />
         <div className=" col-span-2">
           <LatestEarnings data={latest_transaction} />
-          <CustomTable data={fake_transactions} />
+          <SectionTitle text="Latest Transactions" link_to="/dashboard" />
+          <CustomTable class_name="table" data={fake_transactions} />
         </div>
       </div>
     </div>
