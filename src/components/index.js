@@ -9,6 +9,7 @@ import CustomTable from "./CustomTable.jsx";
 import SectionTitle from "./fragments/SectionTitle.jsx";
 import Modal from "./Modal.jsx";
 import TotalBalance from "./fragments/TotalBalance.jsx";
+import Footer from "./Footer.jsx";
 
 export {
   Navbar,
@@ -22,4 +23,5 @@ export {
   SectionTitle,
   Modal,
   TotalBalance,
+  Footer,
 };
