@@ -1,11 +1,11 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Navbar, ProtectedRoute } from "./components";
+import { Navbar, ProtectedRoute, Footer } from "./components";
 import { AuthPage, ProfilePage, HomePage, DashboardPage } from "./pages";
 
 function App() {
   return (
-    <div>
+    <div className=" min-h-screen flex flex-col">
       <Navbar />
       <Routes>
         <Route
@@ -34,6 +34,8 @@ function App() {
         />
         <Route path="/auth" element={<AuthPage />} />
       </Routes>
+
+      <Footer />
     </div>
   );
 }
