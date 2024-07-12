@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { transaction_Categories } from "../constants";
 import InputField from "./fragments/InputField.jsx";
+import { useAddItem } from "../hooks";
 
 function NewTransactionCard({ extra_classes }) {
   const [formData, setformData] = useState({
@@ -11,10 +12,16 @@ function NewTransactionCard({ extra_classes }) {
     description: "",
     datetime: "",
   });
+  const { addItem } = useAddItem();
 
   function handleChange(e) {
     const { name, value } = e.target;
     setformData({ ...formData, [name]: value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    addItem({ ...formData });
   }
 
   return (
@@ -36,6 +43,7 @@ function NewTransactionCard({ extra_classes }) {
         className="pb-6 px-4 lg:px-10"
         method="post"
         id="Transaction_Form"
+        onSubmit={handleSubmit}
       >
         <InputField
           value={formData.amount}
