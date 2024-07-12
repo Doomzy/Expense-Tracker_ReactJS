@@ -4,6 +4,7 @@ import {
   LatestEarnings,
   CustomTable,
   SectionTitle,
+  Modal,
 } from "../components";
 import { latest_transaction, fake_transactions } from "../constants";
 
@@ -27,6 +28,7 @@ function HomePage() {
           <CustomTable class_name="table" data={fake_transactions} />
         </div>
       </div>
+      <Modal />
     </div>
   );
 }
