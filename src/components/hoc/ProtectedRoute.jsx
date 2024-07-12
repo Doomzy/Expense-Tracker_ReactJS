@@ -1,6 +1,5 @@
 import { Navigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
-import { Modal } from "../";
 
 function ProtectedRoute({ children }) {
   const { isSignedIn, isLoaded } = useUser();
@@ -13,11 +12,7 @@ function ProtectedRoute({ children }) {
     return <Navigate to="/auth" />;
   }
 
-  return (
-    <div>
-      {children} <Modal />
-    </div>
-  );
+  return children;
 }
 
 export default ProtectedRoute;
