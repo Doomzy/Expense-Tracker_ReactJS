@@ -8,6 +8,7 @@ function InputField({
   max,
   value,
   handleChange,
+  error,
 }) {
   return (
     <div className="mt-2">
@@ -24,7 +25,11 @@ function InputField({
           type={type}
           placeholder={placeholder}
         />
-        <p className=" ms-3 mt-1 text-xs text-gray-600 font-normal">{msg}</p>
+        {error ? (
+          <p className=" ms-3 mt-1 text-xs text-red font-normal">{error}</p>
+        ) : (
+          <p className=" ms-3 mt-1 text-xs text-gray-600 font-normal">{msg}</p>
+        )}
       </label>
     </div>
   );

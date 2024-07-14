@@ -4,6 +4,7 @@ import InputField from "./fragments/InputField.jsx";
 import { useAddItem } from "../hooks";
 
 function NewTransactionCard({ extra_classes }) {
+  const [errors, setErrors] = useState({});
   const [formData, setformData] = useState({
     amount: "",
     isExpense: false,
@@ -19,9 +20,45 @@ function NewTransactionCard({ extra_classes }) {
     setformData({ ...formData, [name]: value });
   }
 
+  function formValidation(data) {
+    let errors = {};
+    if (data.amount == "" || parseFloat(data.amount) > 1000000) {
+      errors.amount = "Invalid Amount";
+    }
+    if (data.category == "") {
+      errors.category = "Please Choose a Category";
+    }
+    if (data.title == "" || data.title.length > 80) {
+      errors.title = "Please Enter a valid Title";
+    }
+    if (data.title.length > 234) {
+      errors.description = "Description cannot be greater than 234 characters";
+    }
+    if (
+      data.datetime == "" ||
+      data.datetime > new Date().toISOString().slice(0, 16)
+    ) {
+      errors.datetime = "Please Enter a valid Date/Time";
+    }
+    return errors;
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    addItem({ ...formData });
+    const errors = formValidation(formData);
+    if (Object.keys(errors).length === 0) {
+      addItem({ ...formData });
+      setformData({
+        amount: "",
+        isExpense: false,
+        category: "",
+        title: "",
+        description: "",
+        datetime: "",
+      });
+    } else {
+      setErrors(errors);
+    }
   }
 
   return (
@@ -51,7 +88,8 @@ function NewTransactionCard({ extra_classes }) {
           name="amount"
           label="Amount"
           type="number"
-          msg="Max Amount $9999999"
+          msg="Max Amount $1000000"
+          error={errors.amount}
           placeholder="Ex: 15.30 | 100 | 1000.50"
         />
 
@@ -84,6 +122,7 @@ function NewTransactionCard({ extra_classes }) {
           Category
           <select
             onChange={handleChange}
+            value={formData.category}
             name="category"
             id="category"
             className=" rounded-2xl w-full p-2 text-base"
@@ -95,6 +134,11 @@ function NewTransactionCard({ extra_classes }) {
               </option>
             ))}
           </select>
+          {errors.category && (
+            <p className=" ms-3 mt-1 text-xs text-red font-normal">
+              {errors.category}
+            </p>
+          )}
         </label>
 
         <InputField
@@ -104,6 +148,7 @@ function NewTransactionCard({ extra_classes }) {
           label="Title"
           type="text"
           msg="Max Length is 80 Characters"
+          error={errors.title}
           maxLength={80}
           placeholder="Transaction's Title"
         />
@@ -119,6 +164,11 @@ function NewTransactionCard({ extra_classes }) {
             rows={4}
             maxLength={233}
           />
+          {errors.description && (
+            <p className=" ms-3 mt-1 text-xs text-red font-normal">
+              {errors.description}
+            </p>
+          )}
         </label>
 
         <InputField
@@ -129,6 +179,7 @@ function NewTransactionCard({ extra_classes }) {
           type="datetime-local"
           max={new Date().toISOString().slice(0, 16)}
           msg="Cannot be in the future"
+          error={errors.datetime}
         />
         <div className="flex justify-end mt-10 lg:mt-6">
           <button
