@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { transaction_Categories } from "../constants";
+import { expense_Categories, income_Categories } from "../constants";
 import InputField from "./fragments/InputField.jsx";
 import { useAddItem } from "../hooks";
 
@@ -7,7 +7,7 @@ function NewTransactionCard({ extra_classes }) {
   const [errors, setErrors] = useState({});
   const [formData, setformData] = useState({
     amount: "",
-    isExpense: false,
+    type: "income",
     category: "",
     title: "",
     description: "",
@@ -50,7 +50,7 @@ function NewTransactionCard({ extra_classes }) {
       addItem({ ...formData });
       setformData({
         amount: "",
-        isExpense: false,
+        type: "income",
         category: "",
         title: "",
         description: "",
@@ -70,7 +70,7 @@ function NewTransactionCard({ extra_classes }) {
     >
       <p
         className={` text-4xl mb-6 ${
-          formData.isExpense ? " bg-red " : " bg-green "
+          formData.type == "expense" ? " bg-red " : " bg-green "
         }w-full py-6 px-4 rounded-tr-xl rounded-tl-xl`}
       >
         New Transaction
@@ -96,25 +96,33 @@ function NewTransactionCard({ extra_classes }) {
         <div className=" text-lg inline-flex gap-5 items-center justify-center mt-4 w-full">
           <TypeBtn
             text="Income"
-            onclick={() => setformData({ ...formData, isExpense: false })}
+            onclick={() =>
+              setformData({ ...formData, type: "income", category: "" })
+            }
           />
 
           <input
             type="checkbox"
             className="sr-only cursor-pointer peer"
-            checked={formData.isExpense}
+            checked={formData.type == "expense"}
             onChange={handleChange}
           />
           <div
             onClick={() =>
-              setformData({ ...formData, isExpense: !formData.isExpense })
+              setformData({
+                ...formData,
+                category: "",
+                type: (formData.type == "expense" && "income") || "expense",
+              })
             }
             className="cursor-pointer relative w-32 h-10 rounded-full peer bg-green peer-checked:after:translate-x-[4.5rem] rtl:peer-checked:after:-translate-x-full peer-checked:after:border-secondary-dark after:content-[''] after:absolute after:top-1 after:start-[4px] after:bg-white after:border after:rounded-full after:h-8 after:w-12 after:transition-all peer-checked:bg-red"
           ></div>
 
           <TypeBtn
             text="Expense"
-            onclick={() => setformData({ ...formData, isExpense: true })}
+            onclick={() =>
+              setformData({ ...formData, type: "expense", category: "" })
+            }
           />
         </div>
 
@@ -128,7 +136,10 @@ function NewTransactionCard({ extra_classes }) {
             className=" rounded-2xl w-full p-2 text-base"
           >
             <option value="PlaceHolder">Select a Category</option>
-            {transaction_Categories.map((category) => (
+            {(
+              (formData.type == "expense" && expense_Categories) ||
+              income_Categories
+            ).map((category) => (
               <option key={category} value={category}>
                 {category}
               </option>

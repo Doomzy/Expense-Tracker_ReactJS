@@ -18,7 +18,7 @@ export const mobNavLinks = [
   { name: "Profile", icon: Profile_Icon },
 ];
 
-export const transaction_Categories = [
+export const expense_Categories = [
   "Food",
   "Transportation",
   "Shopping",
@@ -26,6 +26,17 @@ export const transaction_Categories = [
   "Entertainment",
   "Education",
   "Subscription",
+  "Other",
+];
+
+export const income_Categories = [
+  "Salary",
+  "Investments",
+  "Rental Income",
+  "Business Income",
+  "Freelance",
+  "Gift",
+  "Selling items",
   "Other",
 ];
 
