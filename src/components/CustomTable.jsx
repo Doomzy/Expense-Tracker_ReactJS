@@ -6,16 +6,18 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useGetItems } from "../hooks";
 
-function CustomTable({ data, class_name }) {
-  const [transactions, setTransactoins] = useState(data);
-  const [sorting, setSorting] = useState([{ id: "date", asc: true }]);
+function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
+  const [sorting, setSorting] = useState([{ id: "date", desc: true }]);
+  const { transactions, handlePageChange, currentPage, isLast } =
+    useGetItems(itemsPerPage);
 
   const navigate = useNavigate();
   const columns = [
     {
       header: "Date",
-      accessorKey: "date",
+      accessorKey: "datetime",
       id: "date",
       sortingFn: "datetime",
     },
@@ -101,6 +103,34 @@ function CustomTable({ data, class_name }) {
           </tbody>
         </table>
       </div>
+      {enablePagination && (
+        <div>
+          <span className="ms-4 text-white text-sm">
+            Page No. {currentPage}
+          </span>
+
+          <div id="Pagination" className="flex justify-between px-1 pt-6">
+            <div className="min-w-1 max-w-max">
+              {currentPage > 1 && (
+                <button
+                  onClick={() => handlePageChange(currentPage - 1, "previous")}
+                >
+                  Previous
+                </button>
+              )}
+            </div>
+            <div className="min-w-1 max-w-max">
+              {!isLast && (
+                <button
+                  onClick={() => handlePageChange(currentPage + 1, "next")}
+                >
+                  Next
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

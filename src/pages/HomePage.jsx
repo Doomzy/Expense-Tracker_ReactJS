@@ -6,7 +6,7 @@ import {
   SectionTitle,
   Modal,
 } from "../components";
-import { latest_transaction, fake_transactions } from "../constants";
+import { latest_transaction } from "../constants";
 
 function HomePage() {
   return (
@@ -25,7 +25,7 @@ function HomePage() {
         <div className=" col-span-2">
           <LatestEarnings data={latest_transaction} />
           <SectionTitle text="Latest Transactions" link_to="/dashboard" />
-          <CustomTable class_name="table" data={fake_transactions} />
+          <CustomTable class_name="table" />
         </div>
       </div>
       <Modal />
