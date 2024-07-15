@@ -47,7 +47,10 @@ function NewTransactionCard({ extra_classes }) {
     e.preventDefault();
     const errors = formValidation(formData);
     if (Object.keys(errors).length === 0) {
-      addItem({ ...formData });
+      addItem({
+        ...formData,
+        amount: ((formData.type == "expense" && -1) || 1) * formData.amount,
+      });
       setformData({
         amount: "",
         type: "income",

@@ -208,6 +208,8 @@ table th,
 table td {
   padding: 0.625em 1rem;
   text-align: center;
+  border-right: 1px solid theme("colors.primary.dark");
+  border-left: 1px solid theme("colors.primary.dark");
 }
 
 table th {
