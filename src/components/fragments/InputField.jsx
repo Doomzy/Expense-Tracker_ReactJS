@@ -20,6 +20,7 @@ function InputField({
           onChange={handleChange}
           maxLength={maxLength}
           max={max}
+          min={1}
           id={name}
           name={name}
           type={type}
