@@ -10,7 +10,7 @@ function useAddItem() {
     title,
     description,
     amount,
-    isExpense,
+    type,
     category,
     datetime,
   }) => {
@@ -19,7 +19,7 @@ function useAddItem() {
       title,
       description,
       amount,
-      isExpense,
+      type,
       category,
       datetime,
       createdAt: serverTimestamp(),
