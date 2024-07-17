@@ -22,7 +22,8 @@ function NewTransactionCard({ extra_classes }) {
 
   function formValidation(data) {
     let errors = {};
-    if (data.amount == "" || parseFloat(data.amount) > 1000000) {
+    let floatamount = parseFloat(data.amount);
+    if (data.amount == "" || floatamount > 1000000 || floatamount < 1) {
       errors.amount = "Invalid Amount";
     }
     if (data.category == "") {
