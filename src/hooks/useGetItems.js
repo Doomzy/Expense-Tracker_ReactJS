@@ -15,6 +15,12 @@ import { useUser } from "@clerk/clerk-react";
 
 function useGetItems(itemsPerPage = 11) {
   const [transactions, setTransactions] = useState([]);
+
+  const defaultSort = {
+    column: "datetime",
+    type: "desc",
+  };
+  const [sortingQuery, setSortingQuery] = useState(defaultSort);
   const [pagination, setpagination] = useState({
     currentPage: 1,
     direction: "next",
@@ -22,6 +28,7 @@ function useGetItems(itemsPerPage = 11) {
     lastVisible: null,
     isLast: false,
   });
+
   const transactionsRef = collection(db, "transactions");
   const { user } = useUser();
 
@@ -37,7 +44,7 @@ function useGetItems(itemsPerPage = 11) {
       const myQuery = query(
         transactionsRef,
         where("uid", "==", user.id),
-        orderBy("datetime", "desc"),
+        orderBy(sortingQuery.column, sortingQuery.type),
         ...directionQuery
       );
       const snapshot = await getDocs(myQuery);
@@ -55,27 +62,30 @@ function useGetItems(itemsPerPage = 11) {
         lastVisible: snapshot.docs[snapshot.docs.length - 2],
         isLast: snapshot.docs.length < itemsPerPage,
       });
-      console.log(snapshot.docs[0]);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const handlePageChange = (pageNumber, direction) => {
+  const handleTableControls = (pageNumber, direction, sortQuery) => {
     setpagination({
       ...pagination,
       currentPage: pageNumber,
       direction: direction,
     });
+
+    if (sortQuery) {
+      setSortingQuery(sortQuery.type ? sortQuery : defaultSort);
+    }
   };
 
   useEffect(() => {
     getItems();
-  }, [pagination.currentPage, pagination.direction]);
+  }, [pagination.currentPage, pagination.direction, sortingQuery]);
 
   return {
     transactions,
-    handlePageChange,
+    handleTableControls,
     currentPage: pagination.currentPage,
     isLast: pagination.isLast,
   };
