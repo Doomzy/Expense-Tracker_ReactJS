@@ -22,14 +22,23 @@ function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
       sortingFn: "datetime",
     },
     {
-      header: "Amount",
-      accessorKey: "amount",
-      id: "amount",
-    },
-    {
-      header: "Title",
+      header: () => <div className="px-32">Title</div>,
       accessorKey: "title",
       id: "title",
+    },
+    {
+      header: "Type",
+      accessorKey: "type",
+      id: "type",
+      cell: (info) => (
+        <span
+          className={
+            (info.getValue() == "income" && "text-green") || "text-red"
+          }
+        >
+          {info.getValue()}
+        </span>
+      ),
     },
     {
       header: "Category",
@@ -37,9 +46,9 @@ function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
       id: "category",
     },
     {
-      header: "Type",
-      accessorKey: "type",
-      id: "type",
+      header: "Amount",
+      accessorKey: "amount",
+      id: "amount",
     },
   ];
 
@@ -75,7 +84,10 @@ function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
                       className=" cursor-pointer"
                       onClick={header.column.getToggleSortingHandler()}
                     >
-                      {header.column.columnDef.header}
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                       {{
                         asc: " 🔼",
                         desc: " 🔽",
