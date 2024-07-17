@@ -2,7 +2,6 @@ import {
   getCoreRowModel,
   useReactTable,
   flexRender,
-  getSortedRowModel,
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +9,7 @@ import { useGetItems } from "../hooks";
 
 function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
   const [sorting, setSorting] = useState([{ id: "date", desc: true }]);
-  const { transactions, handlePageChange, currentPage, isLast } =
+  const { transactions, handleTableControls, currentPage, isLast } =
     useGetItems(itemsPerPage);
 
   const navigate = useNavigate();
@@ -25,11 +24,13 @@ function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
       header: () => <div className="px-32">Title</div>,
       accessorKey: "title",
       id: "title",
+      enableSorting: false,
     },
     {
       header: "Type",
       accessorKey: "type",
       id: "type",
+      enableSorting: false,
       cell: (info) => (
         <span
           className={
@@ -44,6 +45,7 @@ function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
       header: "Category",
       accessorKey: "category",
       id: "category",
+      enableSorting: false,
     },
     {
       header: "Amount",
@@ -55,13 +57,14 @@ function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
   const table = useReactTable({
     columns: columns,
     data: transactions,
+    sortDescFirst: true,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    onSortingChange: setSorting,
 
+    manualSorting: true,
     state: {
       sorting,
     },
+    onSortingChange: setSorting,
   });
 
   return (
@@ -81,8 +84,18 @@ function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
                 {headerGroup.headers.map((header) => (
                   <th key={header.id}>
                     <div
-                      className=" cursor-pointer"
-                      onClick={header.column.getToggleSortingHandler()}
+                      className={
+                        header.column.getCanSort() && " cursor-pointer"
+                      }
+                      onClick={() => {
+                        if (header.column.getCanSort()) {
+                          header.column.toggleSorting();
+                          handleTableControls(1, "next", {
+                            column: header.column.columnDef.accessorKey,
+                            type: header.column.getNextSortingOrder(),
+                          });
+                        }
+                      }}
                     >
                       {flexRender(
                         header.column.columnDef.header,
@@ -125,7 +138,9 @@ function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
             <div className="min-w-1 max-w-max">
               {currentPage > 1 && (
                 <button
-                  onClick={() => handlePageChange(currentPage - 1, "previous")}
+                  onClick={() =>
+                    handleTableControls(currentPage - 1, "previous")
+                  }
                 >
                   Previous
                 </button>
@@ -134,7 +149,7 @@ function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
             <div className="min-w-1 max-w-max">
               {!isLast && (
                 <button
-                  onClick={() => handlePageChange(currentPage + 1, "next")}
+                  onClick={() => handleTableControls(currentPage + 1, "next")}
                 >
                   Next
                 </button>
