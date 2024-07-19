@@ -1,5 +1,10 @@
 import { db } from "../firebase/firebase.js";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  Timestamp,
+} from "firebase/firestore";
 import { useUser } from "@clerk/clerk-react";
 
 function useAddItem() {
@@ -21,7 +26,7 @@ function useAddItem() {
       amount,
       type,
       category,
-      datetime,
+      datetime: Timestamp.fromDate(new Date(datetime)),
       createdAt: serverTimestamp(),
     });
   };
