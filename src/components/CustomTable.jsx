@@ -19,6 +19,18 @@ function CustomTable({ class_name, enablePagination = false, itemsPerPage }) {
       accessorKey: "datetime",
       id: "date",
       sortingFn: "datetime",
+      cell: (info) => {
+        const fireBaseTime = new Date(
+          info.getValue().seconds * 1000 + info.getValue().nanoseconds / 1000000
+        );
+        return (
+          <span>
+            {fireBaseTime.toDateString() +
+              " || " +
+              fireBaseTime.toLocaleTimeString()}
+          </span>
+        );
+      },
     },
     {
       header: () => <div className="px-32">Title</div>,
