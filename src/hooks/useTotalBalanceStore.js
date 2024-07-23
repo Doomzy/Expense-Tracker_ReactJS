@@ -28,8 +28,15 @@ const useTotalBalanceStore = create((set, getState) => ({
     set({ totalBalance: snapshot.data().totalBalance });
   },
 
-  addToBalance: () =>
-    set((state) => ({ totalBalance: state.totalBalance + 1 })),
+  addToBalance: (transactionDate, amount) => {
+    transactionDate = new Date(transactionDate);
+    if (
+      transactionDate >= new Date(getState().period.start) &&
+      transactionDate <= new Date(getState().period.end)
+    ) {
+      set((state) => ({ totalBalance: +state.totalBalance + +amount }));
+    }
+  },
 
   setPeriod: (newValue) => {
     const currentMonth = new Date().getUTCMonth();

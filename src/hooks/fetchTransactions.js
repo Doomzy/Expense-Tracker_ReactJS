@@ -28,7 +28,7 @@ async function fetchTransactions({
     type: "desc",
   };
   const directionQuery =
-    pagination.firstVisible && pagination.currentPage !== 1
+    pagination?.firstVisible && pagination?.currentPage !== 1
       ? pagination.direction == "next"
         ? [startAfter(pagination.lastVisible), limit(itemsPerPage)]
         : [endAt(pagination.firstVisible), limitToLast(itemsPerPage)]
