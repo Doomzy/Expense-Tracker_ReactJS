@@ -1,26 +1,12 @@
 import { useState, useEffect } from "react";
-import {
-  query,
-  collection,
-  where,
-  orderBy,
-  limit,
-  getDocs,
-  startAfter,
-  limitToLast,
-  endAt,
-} from "firebase/firestore";
-import { db } from "../firebase/firebase.js";
 import { useUser } from "@clerk/clerk-react";
+import { fetchTransactions } from "./";
 
 function useGetItems(itemsPerPage = 11) {
   const [transactions, setTransactions] = useState([]);
 
-  const defaultSort = {
-    column: "datetime",
-    type: "desc",
-  };
-  const [sortingQuery, setSortingQuery] = useState(defaultSort);
+  const [sortingQuery, setSortingQuery] = useState(null);
+  const [filteringQuery, setFilteringQuery] = useState(null);
   const [pagination, setpagination] = useState({
     currentPage: 1,
     direction: "next",
@@ -29,25 +15,17 @@ function useGetItems(itemsPerPage = 11) {
     isLast: false,
   });
 
-  const transactionsRef = collection(db, "transactions");
   const { user } = useUser();
 
   const getItems = async () => {
-    const directionQuery =
-      pagination.firstVisible && pagination.currentPage !== 1
-        ? pagination.direction == "next"
-          ? [startAfter(pagination.lastVisible), limit(itemsPerPage)]
-          : [endAt(pagination.firstVisible), limitToLast(itemsPerPage)]
-        : [limit(itemsPerPage)];
-
     try {
-      const myQuery = query(
-        transactionsRef,
-        where("uid", "==", user.id),
-        orderBy(sortingQuery.column, sortingQuery.type),
-        ...directionQuery
-      );
-      const snapshot = await getDocs(myQuery);
+      const snapshot = await fetchTransactions({
+        uid: user.id,
+        sortingQuery: sortingQuery,
+        pagination: pagination,
+        filteringQuery: filteringQuery,
+        itemsPerPage: itemsPerPage,
+      });
 
       let cleanedData = [];
 
@@ -67,7 +45,12 @@ function useGetItems(itemsPerPage = 11) {
     }
   };
 
-  const handleTableControls = (pageNumber, direction, sortQuery) => {
+  const handleTableControls = (
+    pageNumber,
+    direction,
+    sortQuery,
+    filterQuery
+  ) => {
     setpagination({
       ...pagination,
       currentPage: pageNumber,
@@ -75,13 +58,22 @@ function useGetItems(itemsPerPage = 11) {
     });
 
     if (sortQuery) {
-      setSortingQuery(sortQuery.type ? sortQuery : defaultSort);
+      setSortingQuery(sortQuery.type ? sortQuery : null);
+    }
+
+    if (filterQuery) {
+      setFilteringQuery(filterQuery.type ? filterQuery : null);
     }
   };
 
   useEffect(() => {
     getItems();
-  }, [pagination.currentPage, pagination.direction, sortingQuery]);
+  }, [
+    pagination.currentPage,
+    pagination.direction,
+    sortingQuery,
+    filteringQuery,
+  ]);
 
   return {
     transactions,
