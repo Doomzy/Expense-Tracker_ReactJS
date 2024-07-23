@@ -6,6 +6,7 @@ function useGetItems(itemsPerPage = 11) {
   const [transactions, setTransactions] = useState([]);
 
   const [sortingQuery, setSortingQuery] = useState(null);
+  const [filteringQuery, setFilteringQuery] = useState(null);
   const [pagination, setpagination] = useState({
     currentPage: 1,
     direction: "next",
@@ -22,6 +23,7 @@ function useGetItems(itemsPerPage = 11) {
         uid: user.id,
         sortingQuery: sortingQuery,
         pagination: pagination,
+        filteringQuery: filteringQuery,
         itemsPerPage: itemsPerPage,
       });
 
@@ -43,7 +45,12 @@ function useGetItems(itemsPerPage = 11) {
     }
   };
 
-  const handleTableControls = (pageNumber, direction, sortQuery) => {
+  const handleTableControls = (
+    pageNumber,
+    direction,
+    sortQuery,
+    filterQuery
+  ) => {
     setpagination({
       ...pagination,
       currentPage: pageNumber,
@@ -53,11 +60,20 @@ function useGetItems(itemsPerPage = 11) {
     if (sortQuery) {
       setSortingQuery(sortQuery.type ? sortQuery : null);
     }
+
+    if (filterQuery) {
+      setFilteringQuery(filterQuery.type ? filterQuery : null);
+    }
   };
 
   useEffect(() => {
     getItems();
-  }, [pagination.currentPage, pagination.direction, sortingQuery]);
+  }, [
+    pagination.currentPage,
+    pagination.direction,
+    sortingQuery,
+    filteringQuery,
+  ]);
 
   return {
     transactions,

@@ -15,10 +15,14 @@ async function fetchTransactions({
   uid,
   sortingQuery,
   pagination,
+  filteringQuery,
   itemsPerPage,
 }) {
   const transactionsRef = collection(db, "transactions");
 
+  filteringQuery = filteringQuery
+    ? [where(filteringQuery.column, "==", filteringQuery.type)]
+    : [];
   sortingQuery = sortingQuery ?? {
     column: "datetime",
     type: "desc",
@@ -35,7 +39,8 @@ async function fetchTransactions({
       transactionsRef,
       where("uid", "==", uid),
       orderBy(sortingQuery.column, sortingQuery.type),
-      ...directionQuery
+      ...directionQuery,
+      ...filteringQuery
     );
     const snapshot = await getDocs(myQuery);
     return snapshot;
