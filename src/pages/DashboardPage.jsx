@@ -8,7 +8,7 @@ function DashboardPage() {
       <CustomTable
         class_name=" md:w-full w-max"
         itemsPerPage={11}
-        enablePagination={true}
+        enableControls={true}
       />
       <Modal display_type="block" />
     </div>
