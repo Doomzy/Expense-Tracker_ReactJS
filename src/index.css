@@ -213,9 +213,19 @@ table td {
 }
 
 table th {
-  font-size: 1em;
+  font-size: 1.2em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+table th select {
+  font-size: 1rem;
+  text-align: center;
+  border-bottom: 1px solid theme("colors.secondary.dark");
+}
+
+table th select:focus-visible {
+  outline: none;
 }
 
 @media screen and (max-width: 600px) {

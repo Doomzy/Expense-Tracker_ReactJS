@@ -10,6 +10,9 @@ import SectionTitle from "./fragments/SectionTitle.jsx";
 import Modal from "./Modal.jsx";
 import TotalBalance from "./fragments/TotalBalance.jsx";
 import Footer from "./Footer.jsx";
+import TableHeader from "./fragments/TableHeader.jsx";
+import PaginationCtrls from "./fragments/PaginationCtrls.jsx";
+import CustomTableColumns from "./fragments/CustomTableColumns.jsx";
 
 export {
   Navbar,
@@ -24,4 +27,7 @@ export {
   Modal,
   TotalBalance,
   Footer,
+  TableHeader,
+  PaginationCtrls,
+  CustomTableColumns,
 };
