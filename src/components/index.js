@@ -13,6 +13,8 @@ import Footer from "./Footer.jsx";
 import TableHeader from "./fragments/TableHeader.jsx";
 import PaginationCtrls from "./fragments/PaginationCtrls.jsx";
 import CustomTableColumns from "./fragments/CustomTableColumns.jsx";
+import ModalOpenBtn from "./fragments/ModalOpenBtn.jsx";
+import TransactionDetails from "./TransactionDetails.jsx";
 
 export {
   Navbar,
@@ -30,4 +32,6 @@ export {
   TableHeader,
   PaginationCtrls,
   CustomTableColumns,
+  ModalOpenBtn,
+  TransactionDetails,
 };

@@ -4,8 +4,7 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetItems } from "../hooks";
+import { useGetItems, useModalStore } from "../hooks";
 import { TableHeader, PaginationCtrls, CustomTableColumns } from "./";
 
 function CustomTable({ class_name, enableControls = false, itemsPerPage }) {
@@ -14,7 +13,9 @@ function CustomTable({ class_name, enableControls = false, itemsPerPage }) {
   const { transactions, handleTableControls, currentPage, isLast } =
     useGetItems(itemsPerPage);
 
-  const navigate = useNavigate();
+  const handleOpen = useModalStore((state) => state.handleOpen);
+  const setContentDetails = useModalStore((state) => state.setContentDetails);
+
   const columns = CustomTableColumns;
 
   const table = useReactTable({
@@ -72,7 +73,13 @@ function CustomTable({ class_name, enableControls = false, itemsPerPage }) {
           <tbody>
             {table.getRowModel().rows.map((row) => (
               //navigate({row.id})
-              <tr key={row.id} onClick={() => navigate("")}>
+              <tr
+                key={row.id}
+                onClick={() => {
+                  setContentDetails(row.original);
+                  handleOpen("transactionDetails");
+                }}
+              >
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
