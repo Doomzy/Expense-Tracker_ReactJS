@@ -1,4 +1,10 @@
-import { CustomTable, TotalBalance, SectionTitle, Modal } from "../components";
+import {
+  CustomTable,
+  TotalBalance,
+  SectionTitle,
+  ModalOpenBtn,
+  Modal,
+} from "../components";
 
 function DashboardPage() {
   return (
@@ -11,6 +17,7 @@ function DashboardPage() {
         enableControls={true}
       />
       <Modal display_type="block" />
+      <ModalOpenBtn />
     </div>
   );
 }

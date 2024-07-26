@@ -1,26 +1,16 @@
-import { useState } from "react";
-import { NewTransactionCard } from "./";
-import { Close_Icon, Plus_Icon } from "../assets";
+import { Close_Icon } from "../assets";
+import { useModalStore } from "../hooks";
+import { NewTransactionCard, TransactionDetails } from "./";
 
 function Modal({ display_type = "hidden" }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useModalStore((state) => state.isOpen);
+  const contentType = useModalStore((state) => state.contentType);
+  const handleClose = useModalStore((state) => state.handleClose);
 
-  const handleOpen = () => {
-    document.body.style.overflowY = "hidden";
-    setIsOpen(true);
-  };
-  const handleClose = () => {
-    document.body.style.overflowY = "scroll";
-    setIsOpen(false);
-  };
+  document.body.style.overflowY = isOpen ? "hidden" : "scroll";
+
   return (
     <div className={`lg:${display_type} block absolute start-0`}>
-      {!isOpen && (
-        <button className="modal-open box_shadow" onClick={handleOpen}>
-          <Plus_Icon width={60} height={60} />
-        </button>
-      )}
-
       {isOpen && (
         <div className="modal">
           <div className="modal-bg" onClick={handleClose}></div>
@@ -32,7 +22,11 @@ function Modal({ display_type = "hidden" }) {
               <Close_Icon width={45} height={45} />
             </button>
 
-            <NewTransactionCard />
+            {contentType == "transactionDetails" ? (
+              <TransactionDetails />
+            ) : (
+              <NewTransactionCard />
+            )}
           </div>
         </div>
       )}
