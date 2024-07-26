@@ -3,6 +3,7 @@ import {
   LatestEarnings,
   CustomTable,
   SectionTitle,
+  ModalOpenBtn,
   Modal,
   TotalBalance,
 } from "../components";
@@ -21,6 +22,7 @@ function HomePage() {
         </div>
       </div>
       <Modal />
+      <ModalOpenBtn />
     </div>
   );
 }
