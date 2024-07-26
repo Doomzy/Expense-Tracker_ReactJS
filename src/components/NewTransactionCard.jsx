@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { expense_Categories, income_Categories } from "../constants";
 import InputField from "./fragments/InputField.jsx";
-import { useAddItem } from "../hooks";
+import { useAddItem, useTotalBalanceStore } from "../hooks";
 
 function NewTransactionCard({ extra_classes }) {
   const [errors, setErrors] = useState({});
@@ -14,6 +14,7 @@ function NewTransactionCard({ extra_classes }) {
     datetime: "",
   });
   const { addItem } = useAddItem();
+  const addToBalance = useTotalBalanceStore((state) => state.addToBalance);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -47,6 +48,7 @@ function NewTransactionCard({ extra_classes }) {
   function handleSubmit(e) {
     e.preventDefault();
     const errors = formValidation(formData);
+    addToBalance(formData.datetime, formData.amount);
     if (Object.keys(errors).length === 0) {
       addItem({
         ...formData,
