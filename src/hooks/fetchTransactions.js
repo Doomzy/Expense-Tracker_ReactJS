@@ -8,6 +8,7 @@ import {
   limitToLast,
   startAfter,
   endAt,
+  startAt,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase.js";
 
@@ -27,12 +28,30 @@ async function fetchTransactions({
     column: "datetime",
     type: "desc",
   };
-  const directionQuery =
-    pagination?.firstVisible && pagination?.currentPage !== 1
-      ? pagination.direction == "next"
-        ? [startAfter(pagination.lastVisible), limit(itemsPerPage)]
-        : [endAt(pagination.firstVisible), limitToLast(itemsPerPage)]
-      : [limit(itemsPerPage)];
+
+  let directionQuery = [limit(itemsPerPage)];
+  if (pagination?.firstVisible && pagination?.currentPage !== 1) {
+    switch (pagination.direction) {
+      case "next":
+        directionQuery = [
+          startAfter(pagination.lastVisible),
+          limit(itemsPerPage),
+        ];
+        break;
+      case "previous":
+        directionQuery = [
+          endAt(pagination.firstVisible),
+          limitToLast(itemsPerPage),
+        ];
+        break;
+      case "refresh":
+        directionQuery = [
+          startAt(pagination.firstVisible),
+          limit(itemsPerPage),
+        ];
+        break;
+    }
+  }
 
   try {
     const myQuery = query(
