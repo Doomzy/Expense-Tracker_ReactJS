@@ -3,15 +3,24 @@ import {
   useReactTable,
   flexRender,
 } from "@tanstack/react-table";
-import { useState } from "react";
-import { useGetItems, useModalStore } from "../hooks";
+import { useState, useEffect } from "react";
+import { useTransactionsStore, useModalStore } from "../hooks";
 import { TableHeader, PaginationCtrls, CustomTableColumns } from "./";
+import { useUser } from "@clerk/clerk-react";
 
 function CustomTable({ class_name, enableControls = false, itemsPerPage }) {
   const [sorting, setSorting] = useState([{ id: "date", desc: true }]);
   const [selectedFilter, setSelectedFilter] = useState("");
-  const { transactions, handleTableControls, currentPage, isLast } =
-    useGetItems(itemsPerPage);
+
+  const {
+    handleTableControls,
+    transactions,
+    pagination,
+    getTransactions,
+    sortingQuery,
+    filteringQuery,
+  } = useTransactionsStore((state) => state);
+  const { user } = useUser();
 
   const handleOpen = useModalStore((state) => state.handleOpen);
   const setContentDetails = useModalStore((state) => state.setContentDetails);
@@ -30,6 +39,11 @@ function CustomTable({ class_name, enableControls = false, itemsPerPage }) {
     },
     onSortingChange: setSorting,
   });
+
+  useEffect(
+    () => async () => await getTransactions(itemsPerPage, user.id),
+    [pagination.currentPage, pagination.direction, sortingQuery, filteringQuery]
+  );
 
   return (
     <div>
@@ -95,8 +109,8 @@ function CustomTable({ class_name, enableControls = false, itemsPerPage }) {
       </div>
       {enableControls && (
         <PaginationCtrls
-          currentPage={currentPage}
-          isLast={isLast}
+          currentPage={pagination.currentPage}
+          isLast={pagination.isLast}
           handleTableControls={handleTableControls}
         />
       )}
