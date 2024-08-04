@@ -1,11 +1,12 @@
 import { Navigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import { LoadingIcon } from "../";
 
 function ProtectedRoute({ children }) {
   const { isSignedIn, isLoaded } = useUser();
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <LoadingIcon />;
   }
 
   if (!isSignedIn) {
