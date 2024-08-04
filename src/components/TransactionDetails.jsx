@@ -10,7 +10,9 @@ function TransactionDetails() {
   }
 
   const timedate = getDate(contentDetails.datetime);
-  const createdAt = getDate(contentDetails.createdAt);
+  const createdAt = contentDetails.createdAt
+    ? getDate(contentDetails.createdAt)
+    : "Now";
   const { deleteItem } = useDeleteItem();
 
   return (
