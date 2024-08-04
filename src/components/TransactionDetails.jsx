@@ -11,7 +11,7 @@ function TransactionDetails() {
 
   const timedate = getDate(contentDetails.datetime);
   const createdAt = contentDetails.createdAt
-    ? getDate(contentDetails.createdAt)
+    ? getDate(contentDetails.createdAt).toDateString()
     : "Now";
   const { deleteItem } = useDeleteItem();
 
@@ -34,7 +34,13 @@ function TransactionDetails() {
         </p>
         <div className="flex gap-2">
           <DetailsText header="Date" info={timedate.toDateString()} />
-          <DetailsText header="Time" info={timedate.toLocaleTimeString()} />
+          <DetailsText
+            header="Time"
+            info={timedate.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          />
         </div>
 
         <div className="flex gap-4">
@@ -53,7 +59,7 @@ function TransactionDetails() {
       </div>
       <div className=" w-full flex justify-between p-3">
         <span className="text-primary-normal text-sm content-center">
-          Created at: {createdAt.toDateString()}
+          Created at: {createdAt}
         </span>
         <button
           className="bg-red p-3"

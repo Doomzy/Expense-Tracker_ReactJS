@@ -12,9 +12,14 @@ const CustomTableColumns = [
       );
       return (
         <span>
-          {fireBaseTime.toDateString() +
-            " || " +
-            fireBaseTime.toLocaleTimeString()}
+          {fireBaseTime.toLocaleString("en-GB", {
+            hour12: true,
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
         </span>
       );
     },
