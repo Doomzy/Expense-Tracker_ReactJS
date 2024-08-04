@@ -5,7 +5,12 @@ import {
 } from "@tanstack/react-table";
 import { useState, useEffect } from "react";
 import { useTransactionsStore, useModalStore } from "../hooks";
-import { TableHeader, PaginationCtrls, CustomTableColumns } from "./";
+import {
+  TableHeader,
+  PaginationCtrls,
+  CustomTableColumns,
+  LoadingIcon,
+} from "./";
 import { useUser } from "@clerk/clerk-react";
 
 function CustomTable({ class_name, enableControls = false, itemsPerPage }) {
@@ -19,6 +24,7 @@ function CustomTable({ class_name, enableControls = false, itemsPerPage }) {
     getTransactions,
     sortingQuery,
     filteringQuery,
+    isLoading,
   } = useTransactionsStore((state) => state);
   const { user } = useUser();
 
@@ -84,29 +90,42 @@ function CustomTable({ class_name, enableControls = false, itemsPerPage }) {
               </tr>
             ))}
           </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              //navigate({row.id})
-              <tr
-                key={row.id}
-                onClick={() => {
-                  setContentDetails(row.original);
-                  handleOpen("transactionDetails");
-                }}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    data-label={cell.column.columnDef.accessorKey}
+          {!isLoading && (
+            <tbody>
+              {transactions.length != 0 ? (
+                table.getRowModel().rows.map((row) => (
+                  <tr
+                    key={row.id}
+                    onClick={() => {
+                      setContentDetails(row.original);
+                      handleOpen("transactionDetails");
+                    }}
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    {row.getVisibleCells().map((cell) => (
+                      <td
+                        key={cell.id}
+                        data-label={cell.column.columnDef.accessorKey}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td className="text-2xl font-semibold" colSpan={5}>
+                    No Tranasctions
                   </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
+                </tr>
+              )}
+            </tbody>
+          )}
         </table>
       </div>
+      {isLoading && <LoadingIcon />}
       {enableControls && (
         <PaginationCtrls
           currentPage={pagination.currentPage}

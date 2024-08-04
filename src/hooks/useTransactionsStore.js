@@ -13,6 +13,8 @@ const useTransactionsStore = create((set, getState) => ({
     isLast: false,
   },
 
+  isLoading: false,
+
   handleTableControls: (pageNumber, direction, sortQuery, filterQuery) => {
     set((state) => ({
       pagination: {
@@ -37,6 +39,7 @@ const useTransactionsStore = create((set, getState) => ({
 
   getTransactions: async (itemsPerPage = 11, uid) => {
     try {
+      set((state) => ({ ...state, isLoading: true }));
       const snapshot = await fetchTransactions({
         uid: uid,
         sortingQuery: getState().sortingQuery,
@@ -59,6 +62,7 @@ const useTransactionsStore = create((set, getState) => ({
           lastVisible: snapshot.docs[snapshot.docs.length - 2],
           isLast: snapshot.docs.length < itemsPerPage,
         },
+        isLoading: false,
       }));
       console.log(snapshot);
     } catch (e) {
