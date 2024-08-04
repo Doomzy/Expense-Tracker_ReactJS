@@ -15,6 +15,7 @@ import PaginationCtrls from "./fragments/PaginationCtrls.jsx";
 import CustomTableColumns from "./fragments/CustomTableColumns.jsx";
 import ModalOpenBtn from "./fragments/ModalOpenBtn.jsx";
 import TransactionDetails from "./TransactionDetails.jsx";
+import LoadingIcon from "./fragments/LoadingIcon.jsx";
 
 export {
   Navbar,
@@ -34,4 +35,5 @@ export {
   CustomTableColumns,
   ModalOpenBtn,
   TransactionDetails,
+  LoadingIcon,
 };

@@ -304,3 +304,16 @@ table th select:focus-visible {
   background-color: theme("colors.secondary.dark");
   border-radius: 1rem;
 }
+
+.loading-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
