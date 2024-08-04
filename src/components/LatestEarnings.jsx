@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import { SectionTitle, LoadingIcon } from "./";
-import { fetchTransactions } from "../hooks";
+import { fetchTransactions, useModalStore } from "../hooks";
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 
@@ -8,6 +7,9 @@ function LatestEarnings() {
   const { user } = useUser();
   const [latestEarning, setLatestEarning] = useState([]);
   const [isLoading, setisLoading] = useState(false);
+
+  const handleOpen = useModalStore((state) => state.handleOpen);
+  const setContentDetails = useModalStore((state) => state.setContentDetails);
 
   useEffect(() => {
     setisLoading(true);
@@ -39,19 +41,25 @@ function LatestEarnings() {
       ) : latestEarning.length != 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-7 text-primary-normal">
           {latestEarning.map((transaction) => (
-            <Link
-              to=""
+            <div
+              onClick={() => {
+                setContentDetails(transaction);
+                handleOpen("transactionDetails");
+              }}
               key={transaction.id}
-              className="bg-green py-10 content-center text-center rounded-2xl grid hover:scale-105"
+              className="bg-green py-10 content-center text-center rounded-2xl grid hover:scale-105 cursor-pointer"
             >
               <span className="font-bold text-sm">
-                {new Date(transaction.datetime).toDateString()}
+                {new Date(
+                  transaction.datetime.seconds * 1000 +
+                    transaction.datetime.nanoseconds / 1000000
+                ).toDateString()}
               </span>
               <span className="font-bold text-2xl">{transaction.category}</span>
               <span className="text-4xl text-white font-semibold">
                 ${transaction.amount}
               </span>
-            </Link>
+            </div>
           ))}
         </div>
       ) : (
