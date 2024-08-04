@@ -1,11 +1,19 @@
 import { useModalStore } from "../hooks";
+import useDeleteItem from "../hooks/useDeleteItem";
 
 function TransactionDetails() {
   const contentDetails = useModalStore((state) => state.contentDetails);
-  const timedate = new Date(
-    contentDetails.datetime.seconds * 1000 +
-      contentDetails.datetime.nanoseconds / 1000000
-  );
+  const handleClose = useModalStore((state) => state.handleClose);
+
+  function getDate(date) {
+    return new Date(date.seconds * 1000 + date.nanoseconds / 1000000);
+  }
+
+  const timedate = getDate(contentDetails.datetime);
+  const createdAt = contentDetails.createdAt
+    ? getDate(contentDetails.createdAt)
+    : "Now";
+  const { deleteItem } = useDeleteItem();
 
   return (
     <div className=" sticky top-[4rem] bg-white text-white rounded-xl h-fit box_shadow font-semibold">
@@ -43,16 +51,30 @@ function TransactionDetails() {
           }
         />
       </div>
+      <div className=" w-full flex justify-between p-3">
+        <span className="text-primary-normal text-sm content-center">
+          Created at: {createdAt.toDateString()}
+        </span>
+        <button
+          className="bg-red p-3"
+          onClick={async () => {
+            await deleteItem(contentDetails.id);
+            handleClose();
+          }}
+        >
+          Del
+        </button>
+      </div>
     </div>
   );
 }
 
 function DetailsText({ header, info }) {
   return (
-    <p className="text-base mb-3 text-primary-dark">
+    <span className="text-base mb-3 text-primary-dark">
       {header}
       <p className=" text-xl border bg-gray-300 w-fit p-2 rounded-lg">{info}</p>
-    </p>
+    </span>
   );
 }
 
