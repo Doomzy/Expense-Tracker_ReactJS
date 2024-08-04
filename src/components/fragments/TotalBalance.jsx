@@ -5,9 +5,12 @@ import { useUser } from "@clerk/clerk-react";
 
 function TotalBalance() {
   const totalBalance = useTotalBalanceStore((state) => state.totalBalance);
+  const totalIncome = useTotalBalanceStore((state) => state.totalIncome);
+  const totalExpense = useTotalBalanceStore((state) => state.totalExpense);
   const fetchTotalBalance = useTotalBalanceStore(
     (state) => state.fetchTotalBalance
   );
+
   const setPeriod = useTotalBalanceStore((state) => state.setPeriod);
   const period = useTotalBalanceStore((state) => state.period);
 
@@ -21,7 +24,7 @@ function TotalBalance() {
   }
 
   return (
-    <div className="flex gap-7 box_shadow justify-center bg-white w-full lg:w-fit min-w-80 px-14 py-8 rounded-xl m-auto font-semibold text-primary-dark">
+    <div className="flex gap-7 box_shadow justify-center bg-white w-full lg:w-fit min-w-80 px-14 py-3 rounded-xl m-auto font-semibold text-primary-dark">
       <div className="content-center">
         <Money_Icon width={100} height={100} />
       </div>
@@ -41,6 +44,10 @@ function TotalBalance() {
         <p className=" text-2xl">Total Balance</p>
 
         <span className="text-6xl text-green">${totalBalance}</span>
+        <div className="flex justify-between mt-2 font-bold text-base">
+          <span className="text-green">{totalIncome}&#129145;</span>
+          <span className="text-red">{totalExpense}&#129147;</span>
+        </div>
       </div>
     </div>
   );

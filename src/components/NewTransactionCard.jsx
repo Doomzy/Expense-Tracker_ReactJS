@@ -55,12 +55,14 @@ function NewTransactionCard({ extra_classes }) {
   function handleSubmit(e) {
     e.preventDefault();
     const errors = formValidation(formData);
+    formData.amount =
+      ((formData.type == "expense" && -1) || 1) * formData.amount;
     addToBalance(formData.datetime, formData.amount);
     handleTableControls(null, "refresh");
     if (Object.keys(errors).length === 0) {
       addItem({
         ...formData,
-        amount: ((formData.type == "expense" && -1) || 1) * formData.amount,
+        amount: formData.amount,
       });
       setformData({
         amount: "",
