@@ -16,6 +16,7 @@ import CustomTableColumns from "./fragments/CustomTableColumns.jsx";
 import ModalOpenBtn from "./fragments/ModalOpenBtn.jsx";
 import TransactionDetails from "./TransactionDetails.jsx";
 import LoadingIcon from "./fragments/LoadingIcon.jsx";
+import DoughnutChart from "./fragments/DoughnutChart.jsx";
 
 export {
   Navbar,
@@ -36,4 +37,5 @@ export {
   ModalOpenBtn,
   TransactionDetails,
   LoadingIcon,
+  DoughnutChart,
 };
