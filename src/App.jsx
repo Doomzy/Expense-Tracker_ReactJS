@@ -1,7 +1,13 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Navbar, ProtectedRoute, Footer } from "./components";
-import { AuthPage, ProfilePage, HomePage, DashboardPage } from "./pages";
+import {
+  AuthPage,
+  ProfilePage,
+  HomePage,
+  DashboardPage,
+  ReportsPage,
+} from "./pages";
 
 function App() {
   return (
@@ -29,6 +35,14 @@ function App() {
           element={
             <ProtectedRoute>
               <DashboardPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/reports"
+          element={
+            <ProtectedRoute>
+              <ReportsPage />
             </ProtectedRoute>
           }
         />
