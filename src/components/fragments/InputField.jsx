@@ -26,6 +26,7 @@ function InputField({
           name={name}
           type={type}
           placeholder={placeholder}
+          className=" w-full"
         />
         {error ? (
           <p className=" ms-3 mt-1 text-xs text-red font-normal">{error}</p>

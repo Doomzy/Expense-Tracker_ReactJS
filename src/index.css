@@ -317,3 +317,10 @@ table th select:focus-visible {
     transform: rotate(360deg);
   }
 }
+
+#Report_Range input {
+  border: 1px solid theme("colors.primary.normal");
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-left: 10px;
+}
