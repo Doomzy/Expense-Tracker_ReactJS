@@ -2,7 +2,7 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart } from "chart.js/auto";
 import { Tooltip, Legend } from "chart.js";
 
-function DoughnutChart({ dataProps = [], title, titleColor }) {
+function DoughnutChart({ dataProps = {}, title, titleColor }) {
   Chart.register(Tooltip, Legend);
 
   const colors = [
@@ -16,10 +16,10 @@ function DoughnutChart({ dataProps = [], title, titleColor }) {
     "#ffa600",
   ];
   const data = {
-    labels: dataProps.map((prop) => prop.label),
+    labels: Object.keys(dataProps),
     datasets: [
       {
-        data: dataProps.map((prop) => prop.value),
+        data: Object.values(dataProps),
         backgroundColor: colors,
         hoverOffset: 4,
       },

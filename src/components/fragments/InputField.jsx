@@ -6,6 +6,7 @@ function InputField({
   placeholder,
   maxLength,
   max,
+  min,
   value,
   handleChange,
   error,
@@ -20,7 +21,7 @@ function InputField({
           onChange={handleChange}
           maxLength={maxLength}
           max={max}
-          min={1}
+          min={min ? min : 1}
           id={name}
           name={name}
           type={type}
