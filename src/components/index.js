@@ -17,6 +17,7 @@ import ModalOpenBtn from "./fragments/ModalOpenBtn.jsx";
 import TransactionDetails from "./TransactionDetails.jsx";
 import LoadingIcon from "./fragments/LoadingIcon.jsx";
 import DoughnutChart from "./fragments/DoughnutChart.jsx";
+import InputField from "./fragments/InputField.jsx";
 
 export {
   Navbar,
@@ -38,4 +39,5 @@ export {
   TransactionDetails,
   LoadingIcon,
   DoughnutChart,
+  InputField,
 };

@@ -6,6 +6,7 @@ function InputField({
   placeholder,
   maxLength,
   max,
+  min,
   value,
   handleChange,
   error,
@@ -20,11 +21,12 @@ function InputField({
           onChange={handleChange}
           maxLength={maxLength}
           max={max}
-          min={1}
+          min={min ? min : 1}
           id={name}
           name={name}
           type={type}
           placeholder={placeholder}
+          className=" w-full"
         />
         {error ? (
           <p className=" ms-3 mt-1 text-xs text-red font-normal">{error}</p>
