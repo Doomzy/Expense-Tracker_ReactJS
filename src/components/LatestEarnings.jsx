@@ -33,7 +33,7 @@ function LatestEarnings() {
 
   return (
     <div>
-      <SectionTitle text="Latest Income" link_to="/" />
+      <SectionTitle text="Latest Income" />
       {isLoading ? (
         <div className="pb-5">
           <LoadingIcon />
