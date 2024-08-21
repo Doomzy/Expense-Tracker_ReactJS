@@ -13,10 +13,10 @@ function TableHeader({
     <th>
       <div
         className={
-          header.column.getCanSort() && enableControls && " cursor-pointer"
+          header.column.getCanSort() && enableControls ? " cursor-pointer" : ""
         }
         onClick={() => {
-          if (header.column.getCanSort() && enableControls) {
+          if (header.column.getCanSort() & enableControls) {
             header.column.toggleSorting();
             handleTableControls(1, "next", {
               column: headerTitle,
@@ -31,7 +31,7 @@ function TableHeader({
           desc: " 🔽",
         }[header.column.getIsSorted()] ?? ""}
       </div>
-      {header.column.columnDef.filters && enableControls && (
+      {header.column.columnDef.filters && enableControls ? (
         <select
           onChange={(e) => {
             handleTableControls(1, "next", null, {
@@ -55,7 +55,7 @@ function TableHeader({
             </option>
           ))}
         </select>
-      )}
+      ) : null}
     </th>
   );
 }
