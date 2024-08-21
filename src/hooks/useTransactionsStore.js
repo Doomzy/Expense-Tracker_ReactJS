@@ -64,7 +64,6 @@ const useTransactionsStore = create((set, getState) => ({
         },
         isLoading: false,
       }));
-      console.log(snapshot);
     } catch (e) {
       console.log(e);
     }

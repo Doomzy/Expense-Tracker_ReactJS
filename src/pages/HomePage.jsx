@@ -7,7 +7,6 @@ import {
   Modal,
   TotalBalance,
 } from "../components";
-import { latest_transaction } from "../constants";
 
 function HomePage() {
   return (
@@ -16,13 +15,13 @@ function HomePage() {
       <div className=" lg:grid grid-cols-3 gap-12 2xl:gap-22 mt-14">
         <NewTransactionCard extra_classes="lg:block hidden" />
         <div className=" col-span-2">
-          <LatestEarnings data={latest_transaction} />
+          <LatestEarnings />
           <SectionTitle text="Latest Transactions" link_to="/dashboard" />
           <CustomTable class_name="table" />
         </div>
       </div>
       <Modal />
-      <ModalOpenBtn />
+      <ModalOpenBtn display_classes="block lg:hidden" />
     </div>
   );
 }
