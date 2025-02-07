@@ -10,7 +10,11 @@ function Modal({ display_type = "hidden" }) {
   document.body.style.overflowY = isOpen ? "hidden" : "scroll";
 
   return (
-    <div className={`lg:${display_type} block absolute start-0`}>
+    <div
+      className={`lg:${
+        display_type == "hidden" && isOpen ? "block" : display_type
+      } block absolute start-0`}
+    >
       {isOpen && (
         <div className="modal">
           <div className="modal-bg" onClick={handleClose}></div>

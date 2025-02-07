@@ -11,15 +11,22 @@ const CustomTableColumns = [
         info.getValue().seconds * 1000 + info.getValue().nanoseconds / 1000000
       );
       return (
-        <span>
-          {fireBaseTime.toLocaleString("en-GB", {
-            hour12: true,
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
+        <span className="grid divide-y-2">
+          <span>
+            {fireBaseTime.toLocaleString("en-GB", {
+              hour12: true,
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+            })}
+          </span>
+          <span>
+            {fireBaseTime.toLocaleString("en-GB", {
+              hour12: true,
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </span>
         </span>
       );
     },
@@ -55,6 +62,14 @@ const CustomTableColumns = [
     header: "Amount",
     accessorKey: "amount",
     id: "amount",
+    cell: (info) => (
+      <span>
+        {info.getValue().toLocaleString("en-US", {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1,
+        })}
+      </span>
+    ),
   },
 ];
 

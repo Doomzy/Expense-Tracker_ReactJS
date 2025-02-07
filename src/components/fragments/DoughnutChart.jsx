@@ -45,16 +45,16 @@ function DoughnutChart({ dataProps = {}, title, titleColor }) {
   };
 
   return (
-    <div className="pt-4 pb-12">
+    <div className="pt-4 pb-12 divide-y-2 divide-opacity-55">
       <div className="flex justify-between p-6">
         <p
-          className={`font-mono text-3xl uppercase font-semibold text-${titleColor} text- pb-2`}
+          className={` text-2xl uppercase font-bold text-${titleColor} text- pb-2`}
         >
           {title}
         </p>
 
         <p
-          className={` text-4xl border-2 p-3 rounded-lg text-${titleColor} border-${titleColor}`}
+          className={` text-3xl border-2 p-3 rounded-lg text-${titleColor} border-${titleColor}`}
         >
           {dataProps.total}$
         </p>

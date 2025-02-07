@@ -4,12 +4,11 @@ import DesktopNav from "./DesktopNav.jsx";
 import MenuBtn from "./MenuBtn.jsx";
 import ProtectedRoute from "./hoc/ProtectedRoute.jsx";
 import NewTransactionCard from "./NewTransactionCard.jsx";
-import LatestEarnings from "./LatestEarnings.jsx";
+import LastCreatedTrans from "./LastCreatedTrans.jsx";
 import CustomTable from "./CustomTable.jsx";
 import SectionTitle from "./fragments/SectionTitle.jsx";
 import Modal from "./Modal.jsx";
 import TotalBalance from "./fragments/TotalBalance.jsx";
-import Footer from "./Footer.jsx";
 import TableHeader from "./fragments/TableHeader.jsx";
 import PaginationCtrls from "./fragments/PaginationCtrls.jsx";
 import CustomTableColumns from "./fragments/CustomTableColumns.jsx";
@@ -26,12 +25,11 @@ export {
   MenuBtn,
   ProtectedRoute,
   NewTransactionCard,
-  LatestEarnings,
+  LastCreatedTrans,
   CustomTable,
   SectionTitle,
   Modal,
   TotalBalance,
-  Footer,
   TableHeader,
   PaginationCtrls,
   CustomTableColumns,

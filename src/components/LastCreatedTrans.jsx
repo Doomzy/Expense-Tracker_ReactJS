@@ -1,53 +1,41 @@
-import { SectionTitle, LoadingIcon } from "./";
-import { fetchTransactions, useModalStore } from "../hooks";
-import { useEffect, useState } from "react";
+import { SectionTitle } from "./";
+import { useEffect } from "react";
 import { useUser } from "@clerk/clerk-react";
+import { useTransactionsStore, useModalStore } from "../hooks";
 
-function LatestEarnings() {
+function LastCreatedTrans() {
   const { user } = useUser();
-  const [latestEarning, setLatestEarning] = useState([]);
-  const [isLoading, setisLoading] = useState(false);
 
   const handleOpen = useModalStore((state) => state.handleOpen);
   const setContentDetails = useModalStore((state) => state.setContentDetails);
 
-  useEffect(() => {
-    setisLoading(true);
-    const getEarnings = async () => {
-      const snapshot = await fetchTransactions({
-        uid: user.id,
-        itemsPerPage: 4,
-        filteringQuery: { column: "type", type: "income" },
-      });
+  const { lastCreated, getLastCreated } = useTransactionsStore((state) => ({
+    lastCreated: state.lastCreated,
+    getLastCreated: state.getLastCreated,
+  }));
 
-      setLatestEarning(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-      );
-      setisLoading(false);
-    };
-    getEarnings();
-  }, []);
+  useEffect(() => {
+    if (user) {
+      getLastCreated(user.id);
+    }
+  }, [user, getLastCreated]);
 
   return (
     <div>
-      <SectionTitle text="Latest Income" />
-      {isLoading ? (
-        <div className="pb-5">
-          <LoadingIcon />
-        </div>
-      ) : latestEarning.length != 0 ? (
+      <SectionTitle text="Last Created" />
+      {lastCreated.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-7 text-primary-normal">
-          {latestEarning.map((transaction) => (
+          {lastCreated.map((transaction) => (
             <div
               onClick={() => {
                 setContentDetails(transaction);
                 handleOpen("transactionDetails");
               }}
               key={transaction.id}
-              className="bg-green py-10 content-center text-center rounded-2xl grid hover:scale-105 cursor-pointer"
+              className={
+                (transaction.type == "income" ? "bg-green" : "bg-red") +
+                " py-10 content-center text-center rounded-2xl grid hover:scale-105 cursor-pointer"
+              }
             >
               <span className="font-bold text-sm">
                 {new Date(
@@ -63,7 +51,7 @@ function LatestEarnings() {
           ))}
         </div>
       ) : (
-        <div className="my-4 bg-green py-10 content-center text-center rounded-2xl">
+        <div className="my-4 bg-secondary-dark py-10 content-center text-center rounded-2xl">
           <span className="text-4xl text-white font-semibold">
             No Transactions
           </span>
@@ -73,4 +61,4 @@ function LatestEarnings() {
   );
 }
 
-export default LatestEarnings;
+export default LastCreatedTrans;

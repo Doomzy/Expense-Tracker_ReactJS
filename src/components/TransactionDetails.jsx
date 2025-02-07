@@ -24,15 +24,19 @@ function TransactionDetails() {
       </p>
       <div className=" px-4 pb-6 pt-2">
         <p
-          className={` float-end text-4xl border-2 ${
+          className={` w-fit mb-5 place-self-center text-4xl border-2 ${
             contentDetails.type == "income"
               ? "border-green text-green"
               : "border-red text-red"
           } p-3 rounded-lg`}
         >
-          {contentDetails.amount}$
+          {contentDetails.amount.toLocaleString("en-US", {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1,
+          })}
+          $
         </p>
-        <div className="flex gap-2">
+        <div className="grid grid-flow-row grid-cols-2 gap-4">
           <DetailsText header="Date" info={timedate.toDateString()} />
           <DetailsText
             header="Time"
@@ -41,21 +45,13 @@ function TransactionDetails() {
               minute: "2-digit",
             })}
           />
-        </div>
-
-        <div className="flex gap-4">
           <DetailsText header="Type" info={contentDetails.type} />
           <DetailsText header="Category" info={contentDetails.category} />
         </div>
 
-        <DetailsText
-          header="Description"
-          info={
-            contentDetails.description == ""
-              ? "No description"
-              : contentDetails.description
-          }
-        />
+        {contentDetails.description && (
+          <DetailsText header="Description" info={contentDetails.description} />
+        )}
       </div>
       <div className=" w-full flex justify-between p-3">
         <span className="text-primary-normal text-sm content-center">
@@ -68,7 +64,7 @@ function TransactionDetails() {
             handleClose();
           }}
         >
-          Del
+          Delete
         </button>
       </div>
     </div>
@@ -79,7 +75,9 @@ function DetailsText({ header, info }) {
   return (
     <span className="text-base mb-3 text-primary-dark">
       {header}
-      <p className=" text-xl border bg-gray-300 w-fit p-2 rounded-lg">{info}</p>
+      <p className=" text-xl border bg-gray-300 w-full p-2 rounded-lg">
+        {info}
+      </p>
     </span>
   );
 }

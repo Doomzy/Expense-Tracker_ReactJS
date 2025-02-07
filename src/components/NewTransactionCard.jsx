@@ -28,6 +28,11 @@ function NewTransactionCard({ extra_classes }) {
     setformData({ ...formData, [name]: value });
   }
 
+  const now = new Date();
+  const offset = now.getTimezoneOffset();
+  let localDate = new Date(now.getTime() - offset * 60 * 1000);
+  localDate = localDate.toISOString().slice(0, 16);
+
   function formValidation(data) {
     let errors = {};
     let floatamount = parseFloat(data.amount);
@@ -43,10 +48,7 @@ function NewTransactionCard({ extra_classes }) {
     if (data.title.length > 234) {
       errors.description = "Description cannot be greater than 234 characters";
     }
-    if (
-      data.datetime == "" ||
-      data.datetime > new Date().toISOString().slice(0, 16)
-    ) {
+    if (data.datetime == "" || data.datetime > localDate) {
       errors.datetime = "Please Enter a valid Date/Time";
     }
     return errors;
@@ -204,7 +206,7 @@ function NewTransactionCard({ extra_classes }) {
           label="Date & Time"
           name="datetime"
           type="datetime-local"
-          max={new Date().toISOString().slice(0, 16)}
+          max={localDate}
           msg="Cannot be in the future"
           error={errors.datetime}
         />

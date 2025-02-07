@@ -126,7 +126,7 @@ function CustomTable({ class_name, enableControls = false, itemsPerPage }) {
         </table>
       </div>
       {isLoading && <LoadingIcon />}
-      {enableControls && (
+      {enableControls && transactions.length != 0 && (
         <PaginationCtrls
           currentPage={pagination.currentPage}
           isLast={pagination.isLast}

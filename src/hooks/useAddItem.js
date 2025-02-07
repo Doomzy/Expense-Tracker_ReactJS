@@ -6,10 +6,12 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { useUser } from "@clerk/clerk-react";
+import useTransactionsStore from "./useTransactionsStore";
 
 function useAddItem() {
   const transactionsRef = collection(db, "transactions");
   const { user } = useUser();
+  const getLastCreated = useTransactionsStore((state) => state.getLastCreated);
 
   const addItem = async ({
     title,
@@ -29,6 +31,7 @@ function useAddItem() {
       datetime: Timestamp.fromDate(new Date(datetime)),
       createdAt: serverTimestamp(),
     });
+    getLastCreated(user.id);
   };
 
   return { addItem };

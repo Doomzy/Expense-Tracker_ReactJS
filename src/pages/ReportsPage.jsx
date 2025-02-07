@@ -75,7 +75,7 @@ function ReportsPage() {
     <div className="w-[90%] 2xl:w-3/4 m-auto mt-16">
       <TotalBalance />
       <SectionTitle text="Report Range:" link_to={""} />
-      <div className="bg-white w-100 md:flex justify-between p-3 mb-4 rounded-xl items-center">
+      <div className="bg-white md:w-fit w-full gap-4 md:flex justify-between p-3 mb-4 rounded-xl items-center">
         <div id="Report_Range" className=" block md:flex gap-5 pe-3">
           <InputField
             required
@@ -99,7 +99,7 @@ function ReportsPage() {
         </div>
 
         <button
-          className="md:w-fit w-full rounded-xl h-fit me-3 py-4 mt-3 md:mt-0 md:px-7 text-primary-normal font-semibold hover:scale-105 transition-all bg-secondary-dark"
+          className="md:w-fit w-full self-end rounded-xl h-fit me-3 py-4 mt-3 md:mt-0 md:px-7 text-secondary-normal font-bold hover:scale-105 transition-all bg-primary-normal"
           onClick={() => handleSubmit()}
         >
           Find

@@ -8,16 +8,19 @@ import {
   documentId,
 } from "firebase/firestore";
 import { useUser } from "@clerk/clerk-react";
-import { useTotalBalanceStore, useTransactionsStore } from "../hooks";
+import { useTransactionsStore, useTotalBalanceStore } from "../hooks";
 
 function useDeleteItem() {
   const transactionsRef = collection(db, "transactions");
   const { user } = useUser();
-  const handleTableControls = useTransactionsStore(
-    (state) => state.handleTableControls
-  );
   const fetchTotalBalance = useTotalBalanceStore(
     (state) => state.fetchTotalBalance
+  );
+  const { getLastCreated, handleTableControls } = useTransactionsStore(
+    (state) => ({
+      getLastCreated: state.getLastCreated,
+      handleTableControls: state.handleTableControls,
+    })
   );
 
   const deleteItem = async (transactionId) => {
@@ -33,6 +36,7 @@ function useDeleteItem() {
       await deleteDoc(docRef);
       fetchTotalBalance(user.id);
       handleTableControls(null, "refresh");
+      getLastCreated(user.id);
     } catch (err) {
       console.log(err);
     }

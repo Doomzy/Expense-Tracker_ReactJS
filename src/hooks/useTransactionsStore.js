@@ -3,6 +3,7 @@ import { create } from "zustand";
 
 const useTransactionsStore = create((set, getState) => ({
   transactions: [],
+  lastCreated: [],
   sortingQuery: null,
   filteringQuery: null,
   pagination: {
@@ -62,6 +63,29 @@ const useTransactionsStore = create((set, getState) => ({
           lastVisible: snapshot.docs[snapshot.docs.length - 2],
           isLast: snapshot.docs.length < itemsPerPage,
         },
+        isLoading: false,
+      }));
+    } catch (e) {
+      console.log(e);
+    }
+  },
+
+  getLastCreated: async (uid) => {
+    try {
+      set((state) => ({ ...state, isLoading: true }));
+      const snapshot = await fetchTransactions({
+        uid: uid,
+        itemsPerPage: 4,
+        sortingQuery: { column: "createdAt", type: "desc" },
+      });
+
+      let cleanedData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      set(() => ({
+        lastCreated: cleanedData,
         isLoading: false,
       }));
     } catch (e) {

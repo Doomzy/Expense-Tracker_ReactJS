@@ -65,9 +65,10 @@ const useTotalBalanceStore = create((set, getState) => ({
         end.setUTCMonth(currentMonth);
         break;
       case "Quarter":
-        var quarter = Math.floor(currentMonth / 3) + 1;
-        start.setUTCMonth(quarter * 2);
-        end.setUTCMonth(start.getUTCMonth() + 3);
+        var quarter = Math.floor(currentMonth / 3);
+        start.setUTCMonth(quarter * 3);
+        end.setUTCMonth(start.getUTCMonth() + 2);
+        end.setUTCDate(end.getUTCDate() + 1);
         break;
     }
     set({ period: { value: newValue, start: start, end: end } });

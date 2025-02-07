@@ -1,6 +1,6 @@
 import {
   NewTransactionCard,
-  LatestEarnings,
+  LastCreatedTrans,
   CustomTable,
   SectionTitle,
   ModalOpenBtn,
@@ -15,7 +15,7 @@ function HomePage() {
       <div className=" lg:grid grid-cols-3 gap-12 2xl:gap-22 mt-14">
         <NewTransactionCard extra_classes="lg:block hidden" />
         <div className=" col-span-2">
-          <LatestEarnings />
+          <LastCreatedTrans />
           <SectionTitle text="Latest Transactions" link_to="/dashboard" />
           <CustomTable class_name="table" />
         </div>
